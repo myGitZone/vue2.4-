@@ -206,10 +206,14 @@ export function defineReactive (
  * Set a property on an object. Adds the new property and
  * triggers change notification if the property doesn't
  * already exist.
+ * 这个set是绑定在原型上的，即Vue.prototype.set,在全局调用的时候是Vue.set,vue实例中调用是this.$set.这样就知道这个函数是干什么的了吧
  */
 export function set (target: Array<any> | Object, key: any, val: any): any {
+  /* 判断值是否为数组，如果是数组，则继续判断传入的index值（key）是否有效 */
   if (Array.isArray(target) && isValidArrayIndex(key)) {
+    /* 取数组长度和传入key的最大值 */
     target.length = Math.max(target.length, key)
+    /* 插入数组 */
     target.splice(key, 1, val)
     return val
   }
