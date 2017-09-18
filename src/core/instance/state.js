@@ -58,7 +58,9 @@ export function initState(vm: Component) {
   } else {
     observe(vm._data = {}, true /* asRootData */)
   }
+  /* 判断是否有计算属性，然后进行计算属性的初始化 */
   if (opts.computed) initComputed(vm, opts.computed)
+  /* 判断是否有watch,如果有则进行初始化 */
   if (opts.watch && opts.watch !== nativeWatch) {
     initWatch(vm, opts.watch)
   }
@@ -187,12 +189,14 @@ function getData(data: Function, vm: Component): any {
 }
 
 const computedWatcherOptions = {lazy: true}
-
+/* 计算属性初始化 */
 function initComputed(vm: Component, computed: Object) {
   process.env.NODE_ENV !== 'production' && checkOptionType(vm, 'computed')
+  /* 初始化一个空对象，赋值给一个变量 */
   const watchers = vm._computedWatchers = Object.create(null)
-
+　/* 遍历计算属性的key */
   for (const key in computed) {
+    /* 获取到计算属性的函数 */
     const userDef = computed[key]
     const getter = typeof userDef === 'function' ? userDef : userDef.get
     if (process.env.NODE_ENV !== 'production' && getter == null) {
@@ -202,14 +206,17 @@ function initComputed(vm: Component, computed: Object) {
       )
     }
     // create internal watcher for the computed property.
+    /* 创建一个watcher实例 */
     watchers[key] = new Watcher(vm, getter || noop, noop, computedWatcherOptions)
 
     // component-defined computed properties are already defined on the
     // component prototype. We only need to define computed properties defined
     // at instantiation here.
+    /* 判断这个key是否在vm实例上,为什么key会在vm实例上，主要是因为在执行extend的时候，已经执行过一次defineComputed， */
     if (!(key in vm)) {
       defineComputed(vm, key, userDef)
     } else if (process.env.NODE_ENV !== 'production') {
+      /* 如果计算属性与已定义的data或者props中的名称冲突则发出warning */
       if (key in vm.$data) {
         warn(`The computed property "${key}" is already defined in data.`, vm)
       } else if (vm.$options.props && key in vm.$options.props) {
@@ -218,7 +225,7 @@ function initComputed(vm: Component, computed: Object) {
     }
   }
 }
-
+/* 将计算属性变成可观察的，即用Object.defineProperty添加get、set */
 export function defineComputed(target: any, key: string, userDef: Object | Function) {
   if (typeof userDef === 'function') {
     sharedPropertyDefinition.get = createComputedGetter(key)
@@ -314,7 +321,7 @@ function createWatcher(vm: Component,
   }
   return vm.$watch(keyOrFn, handler, options)
 }
-
+/* 状态的合并 */
 export function stateMixin(Vue: Class<Component>) {
   // flow somehow has problems with directly declared definition object
   // when using Object.defineProperty, so we have to procedurally build up
@@ -339,12 +346,15 @@ export function stateMixin(Vue: Class<Component>) {
       warn(`$props is readonly.`, this)
     }
   }
+  /* 将data绑定到vm实例的$data属性上具有get属性 */
   Object.defineProperty(Vue.prototype, '$data', dataDef)
+  /* 将props绑定到vm实例的$props属性上具有get属性 */
   Object.defineProperty(Vue.prototype, '$props', propsDef)
-
+  /* 设置实例的set方法 */
   Vue.prototype.$set = set
+  /* 设置实例的del方法 */
   Vue.prototype.$delete = del
-
+  /* 定义watch函数 */
   Vue.prototype.$watch = function (expOrFn: string | Function,
                                    cb: any,
                                    options?: Object): Function {

@@ -64,10 +64,11 @@ export function initRender (vm: Component) {
 }
 
 export function renderMixin (Vue: Class<Component>) {
+  /* 将$nextTick方法绑定到原型上 */
   Vue.prototype.$nextTick = function (fn: Function) {
     return nextTick(fn, this)
   }
-
+  
   Vue.prototype._render = function (): VNode {
     const vm: Component = this
     const {

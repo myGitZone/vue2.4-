@@ -131,6 +131,7 @@ export function observe (value: any, asRootData: ?boolean): Observer | void {
     ob = new Observer(value)
   }
   if (asRootData && ob) {
+    /* 如果是根数据则计数，后面Observer中的observe的asRootData非true */
     ob.vmCount++
   }
   return ob
@@ -213,15 +214,19 @@ export function set (target: Array<any> | Object, key: any, val: any): any {
   if (Array.isArray(target) && isValidArrayIndex(key)) {
     /* 取数组长度和传入key的最大值 */
     target.length = Math.max(target.length, key)
-    /* 插入数组 */
+    /* 插入数组，splice是数组的方法，删除原来的值，添加新植 */
     target.splice(key, 1, val)
     return val
   }
+  /* 如果不是数组，那就是object，验证是否有该属性值 */
   if (hasOwn(target, key)) {
     target[key] = val
     return val
   }
   const ob = (target: any).__ob__
+  /* target._isVue是判断是否为vm自身，防止对自身进行观察，vue官网明确说明：
+  Vue 不允许在已经创建的实例上动态添加新的根级响应式属性(root-level reactive property)。
+  然而它可以使用 Vue.set(object, key, value) 方法将响应属性添加到嵌套的对象上 */
   if (target._isVue || (ob && ob.vmCount)) {
     process.env.NODE_ENV !== 'production' && warn(
       'Avoid adding reactive properties to a Vue instance or its root $data ' +
@@ -234,6 +239,7 @@ export function set (target: Array<any> | Object, key: any, val: any): any {
     return val
   }
   defineReactive(ob.value, key, val)
+  /* 这里进行触发数据响应式变化 */
   ob.dep.notify()
   return val
 }

@@ -2,6 +2,7 @@
 
 // these helpers produces better vm code in JS engines due to their
 // explicitness and function inlining
+/* 判断是否是未定义 */
 export function isUndef (v: any): boolean %checks {
   return v === undefined || v === null
 }

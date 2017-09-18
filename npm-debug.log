@@ -1,0 +1,49 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'E:\\nodejs\\node.exe',
+1 verbose cli   'E:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'dev' ]
+2 info using npm@4.1.2
+3 info using node@v7.7.4
+4 verbose run-script [ 'predev', 'dev', 'postdev' ]
+5 info lifecycle vue@2.4.2~predev: vue@2.4.2
+6 silly lifecycle vue@2.4.2~predev: no script for predev, continuing
+7 info lifecycle vue@2.4.2~dev: vue@2.4.2
+8 verbose lifecycle vue@2.4.2~dev: unsafe-perm in lifecycle true
+9 verbose lifecycle vue@2.4.2~dev: PATH: E:\nodejs\node_modules\npm\bin\node-gyp-bin;E:\workspace\VueDemo\vue2.4-Source-code-analysis\node_modules\.bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;E:\nodejs\;E:\Java\jdk1.8.0_121\bin;E:\Java\jdk1.8.0_121\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;E:\Android\sdk\platform-tools;E:\Android\sdk\tools;e:\Git\cmd;E:\Go\bin;E:\TortoiseSVN\bin;C:\Users\宝宝\AppData\Local\Microsoft\WindowsApps;C:\Users\宝宝\AppData\Roaming\npm;e:\Microsoft VS Code\bin
+10 verbose lifecycle vue@2.4.2~dev: CWD: E:\workspace\VueDemo\vue2.4-Source-code-analysis
+11 silly lifecycle vue@2.4.2~dev: Args: [ '/d /s /c',
+11 silly lifecycle   'rollup -w -c build/config.js --environment TARGET:web-full-dev' ]
+12 silly lifecycle vue@2.4.2~dev: Returned: code: 1  signal: null
+13 info lifecycle vue@2.4.2~dev: Failed to exec dev script
+14 verbose stack Error: vue@2.4.2 dev: `rollup -w -c build/config.js --environment TARGET:web-full-dev`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (E:\nodejs\node_modules\npm\lib\utils\lifecycle.js:279:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:194:7)
+14 verbose stack     at ChildProcess.<anonymous> (E:\nodejs\node_modules\npm\lib\utils\spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:194:7)
+14 verbose stack     at maybeClose (internal/child_process.js:899:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid vue@2.4.2
+16 verbose cwd E:\workspace\VueDemo\vue2.4-Source-code-analysis
+17 error Windows_NT 10.0.15063
+18 error argv "E:\\nodejs\\node.exe" "E:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev"
+19 error node v7.7.4
+20 error npm  v4.1.2
+21 error code ELIFECYCLE
+22 error vue@2.4.2 dev: `rollup -w -c build/config.js --environment TARGET:web-full-dev`
+22 error Exit status 1
+23 error Failed at the vue@2.4.2 dev script 'rollup -w -c build/config.js --environment TARGET:web-full-dev'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the vue package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     rollup -w -c build/config.js --environment TARGET:web-full-dev
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs vue
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls vue
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

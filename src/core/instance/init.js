@@ -65,6 +65,7 @@ export function initMixin (Vue: Class<Component>) {
     /* 初始化props、methods、data、computed与watch */
     initState(vm)
     initProvide(vm) // resolve provide after data/props
+    /* created钩子回调 */
     callHook(vm, 'created')
 
     /* istanbul ignore if */
